@@ -1,12 +1,13 @@
 version: 2
+
 services:
   web:
     ports:
-    - 3000:80
+      - 3000:80
     git_url: git@github.com:MikeRogers0/MaestroDocker.git
     git_branch: master
     dockerfile_path: Dockerfile
-    command: "bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     deploy_command: bundle exec rake db:migrate
     volumes:
       - .:/app
@@ -17,6 +18,16 @@ services:
       interval: 90s
       timeout: 10s
       retries: 5
+  worker:
+    command: bundle exec sidekiq
+    git_url: git@github.com:MikeRogers0/MaestroDocker.git
+    git_branch: master
+    dockerfile_path: Dockerfile
+    volumes:
+      - .:/app
+      - bundle_cache:/bundle
+    depends_on:
+      - web
 databases: []
 volumes:
   bundle_cache:
