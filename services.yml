@@ -1,9 +1,0 @@
-services:
-  web:
-    ports:
-    - 3000:80
-    git_url: git@github.com:MikeRogers0/MaestroDocker.git
-    git_branch: master
-    dockerfile_path: Dockerfile
-databases: []
-version: 2
