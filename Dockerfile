@@ -30,10 +30,12 @@ ENV BUNDLE_PATH=/bundle \
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 # Add app files into docker image
-RUN mkdir -p /myapp
-WORKDIR /myapp
+RUN mkdir -p /app
+WORKDIR /app
 
-COPY .ruby-version /myapp/.ruby-version
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
-#COPY . /myapp
+COPY .ruby-version /app/.ruby-version
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN bundle check || bundle install --jobs 20 --binstubs="$BUNDLE_BIN"
+
+COPY . /app
