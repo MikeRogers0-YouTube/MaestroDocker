@@ -40,4 +40,6 @@ RUN bundle check || bundle install --jobs 20 --binstubs="$BUNDLE_BIN"
 
 COPY . /app
 
+RUN yarn install
+
 CMD bundle exec rails s -p 3000 -b '0.0.0.0'
