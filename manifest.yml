@@ -1,0 +1,17 @@
+docker:
+  configuration:
+    kubernetes_version: 1.10.7
+    vpc_id: default
+  servers:
+  - server:
+      unique_name: master
+      size: t2.small
+      region: eu-west-2
+      vendor: aws
+      key_name: Default
+  - server:
+      unique_name: master
+      size: t2.small
+      region: eu-west-2
+      vendor: aws
+      key_name: Default
