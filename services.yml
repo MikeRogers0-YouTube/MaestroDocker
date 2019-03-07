@@ -1,0 +1,6 @@
+services:
+  web:
+    git_url: git@github.com:MikeRogers0/MaestroDocker.git
+    git_branch: master
+    dockerfile_path: Dockerfile
+databases: []
