@@ -5,5 +5,6 @@ services:
     git_url: git@github.com:MikeRogers0/MaestroDocker.git
     git_branch: master
     dockerfile_path: Dockerfile
+    command: "bundle exec rails s -p 3000 -b '0.0.0.0'"
 databases: []
 version: 2
