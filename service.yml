@@ -1,6 +1,8 @@
+version: 2
 services:
   rails-app:
     git_url: git@github.com:MikeRogers0/MaestroDocker.git
     git_branch: master
+    ports:
+    - 3000:80
     dockerfile_path: Dockerfile
-databases: []
