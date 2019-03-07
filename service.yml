@@ -1,3 +1,4 @@
+version: 2
 services:
   web:
     ports:
@@ -5,7 +6,17 @@ services:
     git_url: git@github.com:MikeRogers0/MaestroDocker.git
     git_branch: master
     dockerfile_path: Dockerfile
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: "bundle exec rails s -p 3000 -b '0.0.0.0'"
     deploy_command: bundle exec rake db:migrate
+    volumes:
+      - .:/myapp
+      - bundle_cache:/bundle
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "tcp://0.0.0.0:3000"]
+      interval: 90s
+      timeout: 10s
+      retries: 5
 databases: []
-version: 2
+volumes:
+  bundle_cache:

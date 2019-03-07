@@ -35,4 +35,4 @@ RUN bundle check || bundle install --without development:test -j4 --deployment -
 COPY . /app
 
 RUN yarn install
-RUN bundle exec rake assets:precompile
+RUN RAILS_ENV=production bundle exec rake assets:precompile
