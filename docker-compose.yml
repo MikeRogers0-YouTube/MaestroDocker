@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   db:
-    container_name: RailsDeployingApp-Database
+    container_name: MaestroDocker-Database
     image: postgres:10.4-alpine
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
