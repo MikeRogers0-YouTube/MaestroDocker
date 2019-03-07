@@ -18,8 +18,11 @@ echo "Author: Mike Rogers (@MikeRogers0)"
 echo ""
 bundle check || bundle install --jobs 20 --binstubs="$BUNDLE_BIN"
 
+# Install Yarn stuff
+yarn install
+
+# Run migrations
+bundle exec rake db:migrate
+
 # Removing any old pids from a previous run
 rm -f tmp/pids/server.pid
-
-# Finally call command issued to the docker service
-exec "$@"
