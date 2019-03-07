@@ -16,12 +16,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 ENV PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:${PATH}"
 
-# Add bundle entry point to handle bundle cache
-RUN mkdir -p /.docker
-ADD /.docker /.docker
-RUN chmod +x /.docker/entrypoint.sh
-ENTRYPOINT ["/.docker/entrypoint.sh"]
-
 # Bundle installs with binstubs to our custom /bundle/bin volume path. 
 # Let system use those stubs.
 ENV BUNDLE_PATH=/bundle \
@@ -41,7 +35,4 @@ RUN bundle check || bundle install --without development:test -j4 --deployment -
 COPY . /app
 
 RUN yarn install
-
 RUN bundle exec rake assets:precompile
-
-CMD bundle exec rails s -p 3000 -b '0.0.0.0'
