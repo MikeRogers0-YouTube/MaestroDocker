@@ -30,9 +30,9 @@ WORKDIR /app
 COPY .ruby-version /app/.ruby-version
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle check || bundle install --without development:test -j4 --deployment --jobs 2 --binstubs="$BUNDLE_BIN"
+RUN bundle check || bundle install -j4 --deployment --jobs 2 --binstubs="$BUNDLE_BIN"
 
 COPY . /app
 
 RUN yarn install
-RUN RAILS_ENV=production bundle exec rake assets:precompile
+RUN bundle exec rake assets:precompile
