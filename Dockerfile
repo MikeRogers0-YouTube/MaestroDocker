@@ -36,7 +36,7 @@ WORKDIR /app
 COPY .ruby-version /app/.ruby-version
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle check || bundle install --jobs 20 --binstubs="$BUNDLE_BIN"
+RUN bundle check || bundle install --without development:test -j4 --deployment --jobs 2 --binstubs="$BUNDLE_BIN"
 
 COPY . /app
 
