@@ -37,7 +37,6 @@ RUN bundle check || bundle install -j4 --deployment --jobs 2 --binstubs="$BUNDLE
 
 COPY . /app
 
-RUN printenv
 RUN yarn install
 
 ARG SECRET_KEY_BASE
