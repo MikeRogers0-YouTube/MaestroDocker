@@ -5,7 +5,7 @@ services:
       http: 80
       https: 443
     command: bundle exec rails s
-    build_command: /bin/sh -c "RAILS_ENV=_env:RAILS_ENV bundle exec rake db:schema:load && bundle exec rake assets:precompile"
+    build_command: /bin/sh -c "RAILS_ENV=_env:RAILS_ENV bundle exec rake db:schema:load"
     deploy_command: /bin/sh -c "RAILS_ENV=_env:RAILS_ENV bundle exec rake db:migrate"
     build_root: "."
     git_url: git@github.com:MikeRogers0/MaestroDocker.git
