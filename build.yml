@@ -1,0 +1,16 @@
+build:
+  version: 2016-03-14 # version of the build schema.
+  steps:
+    builder:
+      name: builder
+      dockerfile: Dockerfile
+      secrets:
+        RACK_ENV:
+          type: string
+          value: _env(RACK_ENV)
+        RAILS_ENV:
+          type: string
+          value: _env(RAILS_ENV)
+        SECRET_KEY_BASE:
+          type: string
+          value: _env(SECRET_KEY_BASE)
