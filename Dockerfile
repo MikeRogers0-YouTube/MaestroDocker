@@ -34,5 +34,6 @@ RUN bundle check || bundle install -j4 --deployment --jobs 2 --binstubs="$BUNDLE
 
 COPY . /app
 
+RUN printenv
 RUN yarn install
-RUN bundle exec rake assets:precompile
+# RUN bundle exec rake assets:precompile

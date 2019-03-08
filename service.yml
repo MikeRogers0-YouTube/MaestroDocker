@@ -1,33 +1,23 @@
-version: 2
-
 services:
   web:
+    git_url: git@github.com:MikeRogers0/MaestroDocker.git
+    git_branch: master
+    command: bundle exec rails s
+    build_command: /bin/sh -c "RAILS_ENV=_env:RAILS_ENV bundle exec rake db:schema:load"
+    deploy_command: /bin/sh -c "RAILS_ENV=_env:RAILS_ENV bundle exec rake db:migrate"
+    build_root: .
     ports:
-      - 3000:80
-    git_url: git@github.com:MikeRogers0/MaestroDocker.git
-    git_branch: master
-    dockerfile_path: Dockerfile
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    deploy_command: bundle exec rake db:migrate
-    volumes:
-      - .:/app
-      - bundle_cache:/bundle
-    restart: on-failure
-    healthcheck:
-      test: ["CMD", "curl", "-f", "tcp://0.0.0.0:3000"]
-      interval: 90s
-      timeout: 10s
-      retries: 5
+      - container: 3000
+        http: 80
+        https: 443
+    env_vars:
+      RAILS_ENV: production
+      RACK_ENV: production
   worker:
-    command: bundle exec sidekiq
     git_url: git@github.com:MikeRogers0/MaestroDocker.git
     git_branch: master
-    dockerfile_path: Dockerfile
-    volumes:
-      - .:/app
-      - bundle_cache:/bundle
-    depends_on:
-      - web
-databases: []
-volumes:
-  bundle_cache:
+    command: bundle exec sidekiq
+    build_root: .
+    env_vars:
+      RAILS_ENV: production
+      RACK_ENV: production

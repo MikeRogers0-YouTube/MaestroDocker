@@ -35,6 +35,18 @@ services:
       interval: 90s
       timeout: 10s
       retries: 5
+  worker:
+    container_name: RailsDeployingApp-Worker
+    environment:
+      - DATABASE_URL=postgres://postgres:@db:5432/RailsDeployingApp_development
+    build: .
+    command: "bundle exec sidekiq"
+    volumes:
+      - .:/myapp
+      - bundle_cache:/bundle
+    depends_on:
+      - db
+      - web
 
 volumes:
   bundle_cache:
