@@ -36,4 +36,4 @@ COPY . /app
 
 RUN printenv
 RUN yarn install
-# RUN bundle exec rake assets:precompile
+RUN bundle exec rake assets:precompile
