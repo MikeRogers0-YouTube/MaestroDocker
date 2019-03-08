@@ -27,6 +27,9 @@ ENV PATH="${BUNDLE_BIN}:${PATH}"
 RUN mkdir -p /app
 WORKDIR /app
 
+ENV RAILS_ENV production
+ENV RACK_ENV production
+
 COPY .ruby-version /app/.ruby-version
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
@@ -36,4 +39,8 @@ COPY . /app
 
 RUN printenv
 RUN yarn install
+
+ARG SECRET_KEY_BASE
+ENV SECRET_KEY_BASE ${SECRET_KEY_BASE}
+
 RUN bundle exec rake assets:precompile
