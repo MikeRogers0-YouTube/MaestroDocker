@@ -39,7 +39,6 @@ COPY . /app
 
 RUN yarn install
 
-ARG SECRET_KEY_BASE
-ENV SECRET_KEY_BASE ${SECRET_KEY_BASE}
+ENV SECRET_KEY_BASE dont-use-to-build
 
 RUN bundle exec rake assets:precompile
