@@ -6,11 +6,11 @@ build:
       dockerfile: Dockerfile
       secrets:
         RACK_ENV:
-          type: string
+          type: env
           value: _env(RACK_ENV)
         RAILS_ENV:
-          type: string
+          type: env
           value: _env(RAILS_ENV)
         SECRET_KEY_BASE:
-          type: string
+          type: env
           value: _env(SECRET_KEY_BASE)
